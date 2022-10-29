@@ -1,0 +1,159 @@
+IMPORT numpy as np
+
+IMPORT matplotlib.pyplot as plt
+
+
+
+DEFINE FUNCTION f(x):
+
+    RETURN 2000*np.log((140000)/(140000-2100*x)) - 9.8*x
+
+
+
+
+
+DEFINE FUNCTION g(x,a,b): 
+
+   RETURN f(((b+a)+(b-a)*x)/2)
+
+
+
+
+
+DEFINE FUNCTION gaussQuadratic(a,b):
+
+    RETURN ( g(-1/np.sqrt(3),a,b)+g(1/np.sqrt(3),a,b) ) * ((b-a)/2)
+
+
+
+DEFINE FUNCTION ModifiedMonteCarlo(a,b,n):
+
+    sum=0
+
+    FOR i IN range(0,n):
+
+       xi=a+(b-a)*np.random.randint(0,1000000)/1000000
+
+       sum+=f(xi)
+
+        
+
+
+
+   
+
+    RETURN (b-a)*sum/n
+
+
+
+
+
+DEFINE FUNCTION MultipleTrap(a,b,n):
+
+    h=(b-a)/n
+
+    sumpoints=0
+
+    FOR i IN range(1,n):
+
+        sumpoints+=f(a+i*h)
+
+
+
+    RETURN (h/2)*(f(a)+f(b)+2*sumpoints)
+
+DEFINE FUNCTION roomberg(a,b,n,row):
+
+    Mat=np.zeros([row,row])
+
+    Mat+=0.0
+
+
+
+    
+
+    FOR i IN range(0,row):
+
+        Mat[i][0]=MultipleTrap(a,b,n)
+
+        n=n*2
+
+
+
+    
+
+    
+
+    FOR q IN range(1,row):
+
+        FOR p IN range(0,row-q):
+
+            Mat[p][q]= (pow(4,q)*Mat[p+1][q-1]-Mat[p][q-1])/( pow(4,q)-1)
+
+
+
+
+
+
+
+    RETURN Mat
+
+    
+
+
+
+
+
+
+
+
+
+DEFINE FUNCTION checkCorrectness(x):
+
+    r=abs((x[0][1]-x[0][0])/(x[0][2]-x[0][1]))
+
+    IF r>3.5:
+
+        RETURN "Roomberg Converging Quickly, No Additional Change of Variables Reqd"
+
+    ELSE:
+
+        RETURN "Roomberg not converging quickly "
+
+
+
+
+
+
+
+
+
+OUTPUT(gaussQuadratic(8,30))
+
+# F
+
+OUTPUT(ModifiedMonteCarlo(8,30,100000))
+
+# F
+
+Mat=roomberg(8,30,4,6)
+
+# F
+
+OUTPUT(checkCorrectness(Mat))
+
+# F
+
+OUTPUT(Mat[0][5])
+
+
+
+# x=np.arange(8,30,0.001)
+
+# y=f(x)
+
+
+
+# plt.plot(x,y)
+
+# plt.show()

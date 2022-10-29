@@ -1,0 +1,18 @@
+Begin
+    a:=INPUT
+    b:=INPUT
+    sum :=0
+    n:=0
+    upper_limit:= m
+    Loop
+        sum=sum+f(xi,yi)
+        n=n+1
+        IF n==m
+            break
+
+    End Loop
+
+    Integration_value=(sum/n)*(b-a)
+
+End
+

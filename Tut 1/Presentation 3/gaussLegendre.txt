@@ -1,0 +1,23 @@
+BEGIN
+
+    n:= INPUT
+    xi[n]:=INPUT
+    wi[n]:=INPUT
+    ans:=0
+
+    DEF f(x):
+        return value
+
+    DEF g(x):
+         return f(((b+a)+(b-a)*x)/2) * (b-a)/2
+
+    FOR i-> 0 to n-1:
+        ans=ans+ wi[i]*g(xi[i])
+    
+    END FOR
+
+    PRINT(ANS)
+
+
+
+END

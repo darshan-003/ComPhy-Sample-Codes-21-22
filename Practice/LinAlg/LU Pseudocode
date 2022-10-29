@@ -1,0 +1,28 @@
+In LU decomposition, we can represent any matrix A as the multiplication of two matrices L and U where L is a lower triangular matrix and U is upper triangular. One of its implementations is here:
+
+M = […] 	//some matrix with nxn elements
+L = zeros(n,n)
+U = zeros(n,n)
+
+L[ : , 1] = M[ : , 1]
+
+U[ 1 , : ] = M[1 , : ]/L[1][1]
+
+for i in range(1, n+1):
+    for j in range(1, n+1): 
+        for k in range(1,j):
+            if i >= j:
+                Val_L += L[i][k]*U[k][j]
+            end
+        end
+
+        for k in range(1,j):
+            if i < j:
+                Val_U += L[i][k]*U[k][j]
+            end
+        end
+
+        L[i][j] = M[i][j] – Val_L
+        U[i][j] = ( M[i][j] – Val_U )/L[i][i]
+    end 
+end

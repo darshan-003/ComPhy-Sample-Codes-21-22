@@ -1,0 +1,8 @@
+DEFINE FUNCTION Det(H)
+  Check whether H is a square matrix
+  FOR i = 1 to 4
+    FOR j = 1 to 4
+      det = 0
+      M = H[i+1:4][k for k not in j]
+      det = det + Det(M)
+  return det
